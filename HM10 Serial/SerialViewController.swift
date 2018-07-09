@@ -105,7 +105,11 @@ final class SerialViewController: UIViewController, UITextFieldDelegate, Bluetoo
     func serialDidReceiveString(_ message: String) {
         // add the received text to the textView, optionally with a line break at the end
                 if let currentText = numberLabel.text {
-                    numberLabel.text =  currentText + message
+                    if let number = Int(message), number < 0 {                    
+                        numberLabel.text = ""
+                    } else {
+                        numberLabel.text =  currentText + message
+                    }
                 } else {
                     numberLabel.text = message
                 }
